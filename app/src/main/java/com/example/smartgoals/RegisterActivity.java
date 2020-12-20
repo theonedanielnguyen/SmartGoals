@@ -88,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
             tp.show();
         }
 
-        if (!confirmPassword.equals(password)) {
+        if (!confirmPassword.getText().toString().equals(password.getText().toString())) {
             Toast tcp = Toast.makeText(this, "Passwords must match!", Toast.LENGTH_SHORT);
             confirmPassword.setError("Passwords must match!");
             tcp.show();
