@@ -24,4 +24,8 @@ public interface UserDao {
 
     @Query("SELECT * FROM user_table WHERE id LIKE :id")
     User getUserById(int id);
+
+    // LOGIN DAO METHOD
+    @Query("SELECT * FROM user_table WHERE email=(:email) AND password=(:password)")
+    User login(String email, String password);
 }

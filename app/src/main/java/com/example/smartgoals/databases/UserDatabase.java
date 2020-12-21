@@ -15,18 +15,18 @@ import com.example.smartgoals.models.User;
 
 @Database(entities = {User.class}, version = 1)
 public abstract class UserDatabase extends RoomDatabase {
-    private static UserDatabase instance;
+    public static UserDatabase userDatabase;
 
     public abstract UserDao userDao();
 
-    public static synchronized UserDatabase getInstance(Context context) {
-        if (instance == null) {
-            instance = Room.databaseBuilder(context.getApplicationContext(), UserDatabase.class, "user_database")
+    public static synchronized UserDatabase getUserDatabase(Context context) {
+        if (userDatabase == null) {
+            userDatabase = Room.databaseBuilder(context.getApplicationContext(), UserDatabase.class, "user_database")
                     .fallbackToDestructiveMigration()
                     .addCallback(roomCallback)
                     .build();
         }
-        return instance;
+        return userDatabase;
     }
 
     // Fill up an example user when database is created
@@ -34,7 +34,7 @@ public abstract class UserDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-            new PopulateDbAsyncTask(instance).execute();
+            new PopulateDbAsyncTask(userDatabase).execute();
         }
     };
 
@@ -48,10 +48,8 @@ public abstract class UserDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(Void... voids) {
             userDao.insert(new User(-1, "TestFirstName", "TestLastName", "hello@android.com", "Password", "Password"));
-
             return null;
         }
-
 
     }
 

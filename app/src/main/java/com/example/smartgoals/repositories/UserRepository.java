@@ -12,7 +12,7 @@ public class UserRepository {
     private User foundUser;
 
     public UserRepository(Application application) {
-        UserDatabase userDatabase = UserDatabase.getInstance(application);
+        UserDatabase userDatabase = UserDatabase.getUserDatabase(application);
         userDao = userDatabase.userDao();
     }
 
