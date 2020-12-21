@@ -5,58 +5,61 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainGoal">
+    tools:context=".MainGoalFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
 
     <EditText
-        android:id="@+id/editTextTextMultiLine2"
+        android:id="@+id/mainGoalDescription"
         android:layout_width="220dp"
         android:layout_height="90dp"
         android:layout_marginTop="40dp"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="Description"
+        android:hint="@string/description"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate2" />
+        app:layout_constraintTop_toBottomOf="@+id/mainGoalCompletionDate"
+        android:importantForAutofill="no" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/mainGoalName"
         android:layout_width="220dp"
         android:layout_height="45dp"
         android:layout_marginTop="160dp"
         android:ems="10"
-        android:hint="Goal Name"
+        android:hint="@string/goalName"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:importantForAutofill="no" />
 
     <EditText
-        android:id="@+id/editTextDate2"
+        android:id="@+id/mainGoalCompletionDate"
         android:layout_width="220dp"
         android:layout_height="45dp"
         android:layout_marginTop="40dp"
         android:ems="10"
-        android:hint="Completion Date"
+        android:hint="@string/completionDate"
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintTop_toBottomOf="@+id/mainGoalName"
+        android:importantForAutofill="no" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/continueToTasks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Continue to tasks"
+        android:text="@string/continueToTasks"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />
+        app:layout_constraintTop_toBottomOf="@+id/mainGoalDescription" />
 </androidx.constraintlayout.widget.ConstraintLayout>

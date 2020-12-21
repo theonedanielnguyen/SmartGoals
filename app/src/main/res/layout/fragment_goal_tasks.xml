@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GoalTasks">
+    tools:context=".GoalTasksFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -16,12 +16,13 @@
         android:layout_height="45dp"
         android:layout_marginTop="160dp"
         android:ems="10"
-        android:hint="Task Name"
+        android:hint="@string/taskName"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/editTextDate"
@@ -29,12 +30,13 @@
         android:layout_height="45dp"
         android:layout_marginTop="36dp"
         android:ems="10"
-        android:hint="Completion Date"
+        android:hint="@string/completionDate"
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/editTextTextMultiLine"
@@ -43,12 +45,13 @@
         android:layout_marginTop="28dp"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="Description"
+        android:hint="@string/description"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDate"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/editTextNumber2"
@@ -56,12 +59,13 @@
         android:layout_height="48dp"
         android:layout_marginTop="40dp"
         android:ems="10"
-        android:hint="Units"
+        android:hint="@string/units"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.27"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/editTextTextPersonName4"
@@ -69,19 +73,20 @@
         android:layout_height="48dp"
         android:layout_marginTop="40dp"
         android:ems="10"
-        android:hint="Measurement"
+        android:hint="@string/measurement"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.658"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
-        android:text="Create!"
+        android:text="@string/create"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextNumber2" />
