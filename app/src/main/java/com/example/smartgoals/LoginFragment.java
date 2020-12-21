@@ -39,17 +39,20 @@ public class LoginFragment extends Fragment {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkDataEntered();
-
-                Intent goalsRedirect = new Intent(getContext(), GoalsActivity.class);
-                startActivity(goalsRedirect);
+                String validate = checkDataEntered();
+                if (validate == "false") {
+                }
+                else {
+                    Intent goalsRedirect = new Intent(getContext(), GoalsActivity.class);
+                    startActivity(goalsRedirect);
+                }
             }
         });
 
         return view;
     }
 
-    void checkDataEntered() {
+    String checkDataEntered() {
         if (TextUtils.isEmpty(email.getText().toString()) ||
                 TextUtils.isEmpty(password.getText().toString()) ||
                 !(email.getText().toString().equals(correct_email)) ||
@@ -58,10 +61,12 @@ public class LoginFragment extends Fragment {
             email.setError("Invalid Credentials!");
             password.setError("Invalid Credentials!");
             invalid.show();
+            return "false";
         }
         else {
             Toast loginSuccess = Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_SHORT);
             loginSuccess.show();
+            return "true";
         }
 
 

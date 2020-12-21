@@ -49,34 +49,40 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Checks validations
-                checkDataEntered();
+                String validate = checkDataEntered();
 
-                // Creates new user
-                User newUser = new User();
-                newUser.setFirstName(firstName.getText().toString());
-                newUser.setLastName(lastName.getText().toString());
-                newUser.setEmail(email.getText().toString());
+                if (validate == "false") {
 
-                String hashed = BCrypt.hashpw(password.getText().toString(), BCrypt.gensalt());
-                newUser.setPassword(hashed);
-                newUser.setConfirmPassword(confirmPassword.getText().toString());
+                }
 
-                // Do Insert Operation
-                UserDatabase userDatabase = UserDatabase.getUserDatabase(getContext());
-                final UserDao userDao = userDatabase.userDao();
-                new Thread(new Runnable () {
-                    @Override
-                    public void run() {
+                else {
+                    // Creates new user
+                    User newUser = new User();
+                    newUser.setFirstName(firstName.getText().toString());
+                    newUser.setLastName(lastName.getText().toString());
+                    newUser.setEmail(email.getText().toString());
 
-                        // Registers the User
-                        userDao.insert(newUser);
-                        System.out.println("New user registered!");
+                    String hashed = BCrypt.hashpw(password.getText().toString(), BCrypt.gensalt());
+                    newUser.setPassword(hashed);
+                    newUser.setConfirmPassword(confirmPassword.getText().toString());
+
+                    // Do Insert Operation
+                    UserDatabase userDatabase = UserDatabase.getUserDatabase(getContext());
+                    final UserDao userDao = userDatabase.userDao();
+                    new Thread(new Runnable () {
+                        @Override
+                        public void run() {
+
+                            // Registers the User
+                            userDao.insert(newUser);
+                            System.out.println("New user registered!");
 //                        Toast.makeText(getContext(), "User Registered!", Toast.LENGTH_SHORT).show();
-                    }
-                }).start();
+                        }
+                    }).start();
 
-                Intent goalsRedirect = new Intent(getContext(), GoalsActivity.class);
-                startActivity(goalsRedirect);
+                    Intent goalsRedirect = new Intent(getContext(), GoalsActivity.class);
+                    startActivity(goalsRedirect);
+                }
             }
         });
 
@@ -88,37 +94,43 @@ public class RegisterFragment extends Fragment {
         return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
     }
 
-    void checkDataEntered() {
+    String checkDataEntered() {
+        String validate = "true";
         if (isEmpty(firstName.getText())) {
             firstName.setError("First name is required!");
             Toast tf = Toast.makeText(getActivity(), "You must enter first name to register!", Toast.LENGTH_SHORT);
             tf.show();
+            validate = "false";
         }
 
         if (isEmpty(lastName.getText())) {
             Toast tl = Toast.makeText(getActivity(), "You must enter last name to register!", Toast.LENGTH_SHORT);
             lastName.setError("Last name is required!");
             tl.show();
-
+            validate = "false";
         }
 
         if (!isEmail(email)) {
             Toast te = Toast.makeText(getActivity(), "You must enter email to register!", Toast.LENGTH_SHORT);
             email.setError("Enter valid email!");
             te.show();
+            validate = "false";
         }
 
         if (password.length() < 8) {
             Toast tp = Toast.makeText(getActivity(), "Password must be at least 8 characters!", Toast.LENGTH_SHORT);
             password.setError("Enter valid password!");
             tp.show();
+            validate = "false";
         }
 
         if (!confirmPassword.getText().toString().equals(password.getText().toString())) {
             Toast tcp = Toast.makeText(getActivity(), "Passwords must match!", Toast.LENGTH_SHORT);
             confirmPassword.setError("Passwords must match!");
             tcp.show();
+            validate = "false";
         }
+        return validate;
     }
 
 }
