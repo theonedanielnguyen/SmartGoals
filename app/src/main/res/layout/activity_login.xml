@@ -7,18 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.SmartGoals.AppBarOverlay" />
-
-    <include
-        android:id="@+id/include"
-        layout="@layout/content_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <EditText
         android:id="@+id/loginEmail"
         android:layout_width="wrap_content"
