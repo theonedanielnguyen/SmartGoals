@@ -11,9 +11,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
+
+import com.example.smartgoals.models.User;
+import com.example.smartgoals.viewmodels.UserViewModel;
 
 public class RegisterActivity extends AppCompatActivity {
-
+    private UserViewModel userViewModel;
 
     EditText firstName;
     EditText lastName;
@@ -23,10 +27,13 @@ public class RegisterActivity extends AppCompatActivity {
     Button register;
     Button login;
 
+    @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
 
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
@@ -36,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         register = (Button) findViewById(R.id.register);
         login = (Button) findViewById(R.id.redirectLogin);
 
+        // click listeners
         register.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,6 +71,9 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     void checkDataEntered() {
+        String pass = password.getText().toString();
+        String cpass = confirmPassword.getText().toString();
+
         if (isEmpty(firstName)) {
             firstName.setError("First name is required!");
             Toast tf = Toast.makeText(this, "You must enter first name to register!", Toast.LENGTH_SHORT);
@@ -88,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
             tp.show();
         }
 
-        if (!confirmPassword.getText().toString().equals(password.getText().toString())) {
+        if (!pass.equals(cpass)) {
             Toast tcp = Toast.makeText(this, "Passwords must match!", Toast.LENGTH_SHORT);
             confirmPassword.setError("Passwords must match!");
             tcp.show();
