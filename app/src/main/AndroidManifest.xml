@@ -9,13 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartGoals">
+        <activity android:name=".MainActivity"></activity>
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login"
-            android:theme="@style/Theme.SmartGoals.NoActionBar"></activity>
-        <activity
-            android:name=".RegisterActivity"
-            android:label="@string/app_name"
+            android:name=".LogAndRegActivity"
             android:theme="@style/Theme.SmartGoals.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,9 +20,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.SmartGoals.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".RegisterActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.SmartGoals.NoActionBar"></activity>
+            android:theme="@style/Theme.SmartGoals.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>
