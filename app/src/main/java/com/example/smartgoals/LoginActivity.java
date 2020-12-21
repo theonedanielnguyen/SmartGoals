@@ -11,6 +11,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.smartgoals.daos.UserDao;
+import com.example.smartgoals.databases.UserDatabase;
+import com.example.smartgoals.models.User;
+
 public class LoginActivity extends AppCompatActivity {
 
     EditText email;
@@ -45,8 +49,6 @@ public class LoginActivity extends AppCompatActivity {
             }});
 
     }
-
-
 
     void checkDataEntered() {
         if (TextUtils.isEmpty(email.getText().toString()) ||

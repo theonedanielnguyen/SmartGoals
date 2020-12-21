@@ -13,6 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.smartgoals.daos.UserDao;
+import com.example.smartgoals.databases.UserDatabase;
+import com.example.smartgoals.models.User;
+
 import static android.text.TextUtils.isEmpty;
 
 public class RegisterFragment extends Fragment {
@@ -41,7 +45,30 @@ public class RegisterFragment extends Fragment {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Checks validations
                 checkDataEntered();
+
+                // Creates new user
+                User newUser = new User();
+                newUser.setFirstName(firstName.getText().toString());
+                newUser.setLastName(lastName.getText().toString());
+                newUser.setEmail(email.getText().toString());
+                newUser.setPassword(password.getText().toString());
+                newUser.setConfirmPassword(confirmPassword.getText().toString());
+
+                // Do Insert Operation
+                UserDatabase userDatabase = UserDatabase.getUserDatabase(getContext());
+                final UserDao userDao = userDatabase.userDao();
+                new Thread(new Runnable () {
+                    @Override
+                    public void run() {
+
+                        // Registers the User
+                        userDao.insert(newUser);
+                        System.out.println("New user registered!");
+//                        Toast.makeText(getContext(), "User Registered!", Toast.LENGTH_SHORT).show();
+                    }
+                }).start();
             }
         });
 
