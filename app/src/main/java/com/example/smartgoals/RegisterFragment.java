@@ -17,6 +17,8 @@ import com.example.smartgoals.daos.UserDao;
 import com.example.smartgoals.databases.UserDatabase;
 import com.example.smartgoals.models.User;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import static android.text.TextUtils.isEmpty;
 
 public class RegisterFragment extends Fragment {
@@ -53,7 +55,9 @@ public class RegisterFragment extends Fragment {
                 newUser.setFirstName(firstName.getText().toString());
                 newUser.setLastName(lastName.getText().toString());
                 newUser.setEmail(email.getText().toString());
-                newUser.setPassword(password.getText().toString());
+
+                String hashed = BCrypt.hashpw(password.getText().toString(), BCrypt.gensalt());
+                newUser.setPassword(hashed);
                 newUser.setConfirmPassword(confirmPassword.getText().toString());
 
                 // Do Insert Operation
