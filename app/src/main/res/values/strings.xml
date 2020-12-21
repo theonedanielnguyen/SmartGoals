@@ -1,17 +1,28 @@
 <resources>
     <string name="app_name">SmartGoals</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- LOGIN AND REGISTRATION STRINGS -->
     <string name="title_activity_login">LoginActivity</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="swipe_left_to_register"> Swipe left to register</string>
     <string name="swipe_right_to_login"> Swipe right to login</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="email">E-Mail</string>
+    <string name="password">Password</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+
+    <!-- GOAL STRINGS -->
+    <string name="goalName">Goal Name</string>
+    <string name="completionDate">Completion Date</string>
+    <string name="description">Description</string>
+    <string name="continueToTasks">Continue to Tasks</string>
+    <string name="taskName">Task Name</string>
+    <string name="units">Units</string>
+    <string name="measurement">Measurement</string>
+    <string name="create">Create!</string>
+
 </resources>

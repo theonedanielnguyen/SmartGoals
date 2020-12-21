@@ -40,6 +40,9 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 checkDataEntered();
+
+                Intent goalsRedirect = new Intent(getContext(), GoalsActivity.class);
+                startActivity(goalsRedirect);
             }
         });
 

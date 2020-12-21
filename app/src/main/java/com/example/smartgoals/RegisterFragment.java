@@ -1,5 +1,6 @@
 package com.example.smartgoals;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -69,6 +70,9 @@ public class RegisterFragment extends Fragment {
 //                        Toast.makeText(getContext(), "User Registered!", Toast.LENGTH_SHORT).show();
                     }
                 }).start();
+
+                Intent goalsRedirect = new Intent(getContext(), GoalsActivity.class);
+                startActivity(goalsRedirect);
             }
         });
 
