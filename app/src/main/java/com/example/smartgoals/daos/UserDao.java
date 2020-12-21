@@ -22,8 +22,13 @@ public interface UserDao {
     @Query("DELETE FROM user_table")
     void deleteAllUsers();
 
+    // NEED THIS FOR SHARED PREFERENCES
     @Query("SELECT * FROM user_table WHERE id LIKE :id")
     User getUserById(int id);
+
+    // NEED THIS TO ENSURE NO REPEATED ACCOUNTS
+    @Query("SELECT * FROM user_table WHERE email LIKE :email")
+    User getUserByEmail(String email);
 
     // LOGIN DAO METHOD
     @Query("SELECT * FROM user_table WHERE email=(:email) AND password=(:password)")
