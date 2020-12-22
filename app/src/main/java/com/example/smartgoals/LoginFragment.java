@@ -1,6 +1,8 @@
 package com.example.smartgoals;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -72,6 +74,9 @@ public class LoginFragment extends Fragment {
                             }
                             else {
                                 if(BCrypt.checkpw(passwordText, user.getPassword())) {
+                                    SharedPreferences prefs = getActivity().getSharedPreferences("com.example.smartGoals", Context.MODE_PRIVATE);
+                                    prefs.edit().putLong("session", user.getId()).commit();
+
                                     Intent dummyDashboard = new Intent(getContext(), DummyDashboard.class);
                                     startActivity(dummyDashboard);
                                 }
