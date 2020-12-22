@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.example.smartgoals.models.User;
+import com.example.smartgoals.models.UserWithGoals;
 import com.example.smartgoals.repositories.UserRepository;
 
 public class UserViewModel extends AndroidViewModel {
@@ -32,5 +33,8 @@ public class UserViewModel extends AndroidViewModel {
         userRepo.deleteAllUsers();
     }
 
+    public void insertUserWithGoals(UserWithGoals userWithGoals) {
+        userRepo.insertGoals(userWithGoals);
+    }
 
 }

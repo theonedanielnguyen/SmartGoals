@@ -5,7 +5,9 @@ import android.os.AsyncTask;
 
 import com.example.smartgoals.daos.UserDao;
 import com.example.smartgoals.databases.UserDatabase;
+import com.example.smartgoals.models.Goal;
 import com.example.smartgoals.models.User;
+import com.example.smartgoals.models.UserWithGoals;
 
 public class UserRepository {
     private UserDao userDao;
@@ -30,6 +32,10 @@ public class UserRepository {
 
     public void deleteAllUsers() {
         new DeleteAllUsersAsyncTask(userDao).execute();
+    }
+
+    public void insertGoals(UserWithGoals userWithGoals) {
+        new InsertGoalsAsyncTask(userDao).execute(userWithGoals);
     }
 
     public User getUserById() {
@@ -89,6 +95,26 @@ public class UserRepository {
         protected Void doInBackground(Void... voids) {
             userDao.deleteAllUsers();
             return null;
+        }
+    }
+
+    private static class InsertGoalsAsyncTask extends AsyncTask<UserWithGoals, Void, Void> {
+        private UserDao userDaoAsync;
+
+        InsertGoalsAsyncTask(UserDao userDao) {
+            userDaoAsync = userDao;
+        }
+
+        @Override
+        protected Void doInBackground(UserWithGoals... userWithGoals) {
+            int identifier = userDaoAsync.insertUser(userWithGoals[0].user);
+
+            for (Goal goal : userWithGoals[0].goals) {
+                goal.setGoalId(identifier);
+            }
+            userDaoAsync.insertGoals(userWithGoals[0].goals);
+            return null;
+
         }
     }
 }
