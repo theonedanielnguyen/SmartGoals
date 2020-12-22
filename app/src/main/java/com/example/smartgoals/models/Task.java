@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
-import java.util.Date;
 
 import static androidx.room.ForeignKey.CASCADE;
 
@@ -17,7 +16,7 @@ public class Task {
     private String name;
 
     @ColumnInfo(name = "completion_date")
-    private Date completionDate;
+    private String completionDate;
 
     @ColumnInfo(name = "info")
     private String info;
@@ -40,7 +39,7 @@ public class Task {
 
     }
 
-    public Task(int task_id, String name, Date completionDate, String info, int unit, String measurement) {
+    public Task(int task_id, String name, String completionDate, String info, int unit, String measurement) {
         this.task_id = task_id;
         this.name = name;
         this.completionDate = completionDate;
@@ -65,11 +64,11 @@ public class Task {
         this.name = name;
     }
 
-    public Date getCompletionDate() {
+    public String getCompletionDate() {
         return completionDate;
     }
 
-    public void setCompletionDate(Date completionDate) {
+    public void setCompletionDate(String completionDate) {
         this.completionDate = completionDate;
     }
 
@@ -95,5 +94,13 @@ public class Task {
 
     public void setMeasurement(String measurement) {
         this.measurement = measurement;
+    }
+
+    public int getGoal_task_id() {
+        return goal_task_id;
+    }
+
+    public void setGoal_task_id(int goal_task_id) {
+        this.goal_task_id = goal_task_id;
     }
 }
