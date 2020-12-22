@@ -28,6 +28,11 @@ public class LoginFragment extends Fragment {
     EditText email;
     EditText password;
     Button loginButton;
+    SharedPreferences sharedPreferences;
+
+    private static final String USER_SESSION = "user_session";
+    private static final String USER_ID = "user_id";
+    private static final String USER_NAME = "user_name";
 
     public LoginFragment() {
         // Required empty public constructor
@@ -40,6 +45,17 @@ public class LoginFragment extends Fragment {
         email = view.findViewById(R.id.loginEmail);
         password = view.findViewById(R.id.loginPassword);
         loginButton = view.findViewById(R.id.loginButton);
+
+        sharedPreferences = getActivity().getSharedPreferences(USER_SESSION, Context.MODE_PRIVATE);
+
+        // when activity is first opened - the checks if the shared preferences data is available or not:
+        String user_name = sharedPreferences.getString(USER_NAME, null);
+        if (user_name != null) {
+
+            // if data is available --> it will redirect you back to the dashboard.
+            Intent redirectToDash = new Intent(getContext(), DummyDashboard.class);
+            startActivity(redirectToDash);
+        }
 
         String emailText = email.getText().toString().trim();
         String passwordText = password.getText().toString().trim();
@@ -74,9 +90,10 @@ public class LoginFragment extends Fragment {
                             }
                             else {
                                 if(BCrypt.checkpw(passwordText, user.getPassword())) {
-                                    SharedPreferences prefs = getActivity().getSharedPreferences("com.example.smartGoals", Context.MODE_PRIVATE);
-                                    prefs.edit().putLong("session", user.getId()).commit();
-
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putLong(USER_ID, user.getId()).commit();
+                                    editor.putString(USER_NAME, user.getFirstName());
+                                    editor.apply();
                                     Intent dummyDashboard = new Intent(getContext(), DummyDashboard.class);
                                     startActivity(dummyDashboard);
                                 }
