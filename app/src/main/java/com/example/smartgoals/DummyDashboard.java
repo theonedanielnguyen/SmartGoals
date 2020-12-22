@@ -8,10 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class DummyDashboard extends AppCompatActivity {
 
     TextView tName;
-    Button continueToNewGoal;
+    FloatingActionButton continueToNewGoal;
     TextView firstGoal;
     TextView secondGoal;
     TextView thirdGoal;
@@ -24,7 +26,7 @@ public class DummyDashboard extends AppCompatActivity {
         tName = findViewById(R.id.firstName);
         String firstName = getIntent().getStringExtra("firstName");
         tName.setText(firstName);
-        continueToNewGoal = findViewById(R.id.addGoal);
+        continueToNewGoal = (FloatingActionButton) findViewById(R.id.addGoal);
         firstGoal = findViewById(R.id.firstGoal);
         secondGoal = findViewById(R.id.secondGoal);
         thirdGoal = findViewById(R.id.thirdGoal);

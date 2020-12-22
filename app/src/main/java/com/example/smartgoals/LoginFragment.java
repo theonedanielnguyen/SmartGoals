@@ -72,8 +72,8 @@ public class LoginFragment extends Fragment {
                             }
                             else {
                                 if(BCrypt.checkpw(passwordText, user.getPassword())) {
-                                    Intent goalsRedirect = new Intent(getContext(), GoalsActivity.class);
-                                    startActivity(goalsRedirect);
+                                    Intent dummyDashboard = new Intent(getContext(), DummyDashboard.class);
+                                    startActivity(dummyDashboard);
                                 }
                             }
                         }

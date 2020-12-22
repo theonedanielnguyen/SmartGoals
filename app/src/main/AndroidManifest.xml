@@ -28,6 +28,8 @@
             android:name=".RegisterActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.SmartGoals.NoActionBar" />
+        <activity android:name=".DummyDashboard"
+            android:theme="@style/Theme.SmartGoals.NoActionBar" />
     </application>
 
 </manifest>
