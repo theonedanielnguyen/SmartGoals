@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
+
 import java.util.Date;
 import static androidx.room.ForeignKey.CASCADE;
 
@@ -19,7 +21,7 @@ public class Goal {
     private String description;
 
     @ColumnInfo(name = "endDate")
-    private Date endDate;
+    private String endDate;
 
     @ForeignKey(
             entity = User.class,
@@ -33,7 +35,7 @@ public class Goal {
 
     }
 
-    public Goal(int goalId, String title, String description, Date endDate) {
+    public Goal(int goalId, String title, String description, String endDate) {
         this.goalId = goalId;
         this.title = title;
         this.description = description;
@@ -64,12 +66,19 @@ public class Goal {
         this.description = description;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
+    public int getUser_goal_id() {
+        return user_goal_id;
+    }
+
+    public void setUser_goal_id(int user_goal_id) {
+        this.user_goal_id = user_goal_id;
+    }
 }

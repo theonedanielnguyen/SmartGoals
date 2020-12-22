@@ -3,7 +3,10 @@ package com.example.smartgoals.repositories;
 import android.app.Application;
 import android.os.AsyncTask;
 
+import com.example.smartgoals.daos.GoalDao;
 import com.example.smartgoals.daos.UserDao;
+import com.example.smartgoals.databases.GoalDatabase;
+import com.example.smartgoals.models.Goal;
 import com.example.smartgoals.models.User;
 
 public class GoalRepository {
@@ -12,7 +15,7 @@ public class GoalRepository {
     private Goal foundGoal;
 
     public GoalRepository(Application application) {
-        GoalRepository goalRepository = GoalDatabase.getGoalDatabase(application);
+        GoalDatabase goalDatabase = GoalDatabase.getGoalDatabase(application);
         goalDao = goalDatabase.goalDao();
     }
 
@@ -41,7 +44,7 @@ public class GoalRepository {
         }
 
         @Override
-        protected Void doInBackground(Goal... users) {
+        protected Void doInBackground(Goal... goals) {
             goalDao.insert(goals[0]);
             return null;
         }
