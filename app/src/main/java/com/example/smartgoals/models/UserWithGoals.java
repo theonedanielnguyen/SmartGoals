@@ -6,7 +6,9 @@ import java.util.List;
 
 public class UserWithGoals {
 
-    @Embedded public User user;
+    @Embedded
+    public User user;
+
     @Relation(
             parentColumn = "id",
             entityColumn = "goal_id"

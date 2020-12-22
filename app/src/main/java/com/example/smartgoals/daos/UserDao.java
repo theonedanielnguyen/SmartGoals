@@ -4,9 +4,13 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
+import com.example.smartgoals.models.Goal;
 import com.example.smartgoals.models.User;
+
+import java.util.List;
 
 @Dao
 public interface UserDao {
@@ -22,6 +26,13 @@ public interface UserDao {
     @Query("DELETE FROM user_table")
     void deleteAllUsers();
 
+    @Transaction
+    @Insert
+    int insertUser(User user);
+
+    @Insert
+    void insertGoals(List<Goal> goals);
+
     // NEED THIS FOR SHARED PREFERENCES
     @Query("SELECT * FROM user_table WHERE id LIKE :id")
     User getUserById(int id);
@@ -33,4 +44,5 @@ public interface UserDao {
     // LOGIN DAO METHOD
     @Query("SELECT * FROM user_table WHERE email=(:email) AND password=(:password)")
     User login(String email, String password);
+
 }
