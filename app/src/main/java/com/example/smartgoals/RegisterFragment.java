@@ -1,6 +1,8 @@
 package com.example.smartgoals;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -56,32 +58,49 @@ public class RegisterFragment extends Fragment {
                 }
 
                 else {
-                    // Creates new user
-                    User newUser = new User();
-                    newUser.setFirstName(firstName.getText().toString());
-                    newUser.setLastName(lastName.getText().toString());
-                    newUser.setEmail(email.getText().toString());
-
-                    String hashed = BCrypt.hashpw(password.getText().toString(), BCrypt.gensalt());
-                    newUser.setPassword(hashed);
-                    newUser.setConfirmPassword(confirmPassword.getText().toString());
-
-                    // Do Insert Operation
-                    UserDatabase userDatabase = UserDatabase.getUserDatabase(getContext());
-                    final UserDao userDao = userDatabase.userDao();
                     new Thread(new Runnable () {
                         @Override
                         public void run() {
+                            UserDatabase userDatabase = UserDatabase.getUserDatabase(getContext());
+                            final UserDao userDao = userDatabase.userDao();
+                            User user = userDao.getUserByEmail(email.getText().toString());
+                            if (user != null) {
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run(){
+                                        email.setError("Email already exists in the database");
+                                        Toast.makeText(getActivity(), "The email you entered already exists in the database", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                            else {
+                                // Creates new user
+                                User newUser = new User();
+                                newUser.setFirstName(firstName.getText().toString());
+                                newUser.setLastName(lastName.getText().toString());
+                                newUser.setEmail(email.getText().toString());
 
-                            // Registers the User
-                            userDao.insert(newUser);
-                            System.out.println("New user registered!");
+                                String hashed = BCrypt.hashpw(password.getText().toString(), BCrypt.gensalt());
+                                newUser.setPassword(hashed);
+                                newUser.setConfirmPassword(confirmPassword.getText().toString());
+
+                                // Do Insert Operation
+                                new Thread(new Runnable () {
+                                    @Override
+                                    public void run() {
+
+                                        // Registers the User
+                                        userDao.insert(newUser);
+                                        System.out.println("New user registered!");
 //                        Toast.makeText(getContext(), "User Registered!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).start();
+
+                                Intent dummyDashboard = new Intent(getContext(), DummyDashboard.class);
+                                startActivity(dummyDashboard);
+                            }
                         }
                     }).start();
-
-                    Intent dummyDashboard = new Intent(getContext(), DummyDashboard.class);
-                    startActivity(dummyDashboard);
                 }
             }
         });
@@ -95,6 +114,7 @@ public class RegisterFragment extends Fragment {
 
     String checkDataEntered() {
         String validate = "true";
+
         if (isEmpty(firstName.getText())) {
             firstName.setError("First name is required!");
             Toast tf = Toast.makeText(getActivity(), "You must enter first name to register!", Toast.LENGTH_SHORT);
