@@ -14,15 +14,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.smartgoals.databases.UserDatabase;
+import com.example.smartgoals.models.User;
+import com.example.smartgoals.daos.UserDao;
+
+import org.mindrot.jbcrypt.BCrypt;
+
 
 public class LoginFragment extends Fragment {
 
     EditText email;
     EditText password;
     Button loginButton;
-
-    String correct_email = "daniel@gmail.com";
-    String correct_pass = "daniel";
 
     public LoginFragment() {
         // Required empty public constructor
@@ -36,15 +39,46 @@ public class LoginFragment extends Fragment {
         password = view.findViewById(R.id.loginPassword);
         loginButton = view.findViewById(R.id.loginButton);
 
+        String emailText = email.getText().toString().trim();
+        String passwordText = password.getText().toString().trim();
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                UserDatabase userDatabase = UserDatabase.getUserDatabase(getContext());
+                UserDao userDao = userDatabase.userDao();
+
                 String validate = checkDataEntered();
+
                 if (validate == "false") {
                 }
                 else {
-                    Intent goalsRedirect = new Intent(getContext(), GoalsActivity.class);
-                    startActivity(goalsRedirect);
+                    new Thread(new Runnable () {
+                        @Override
+                        public void run() {
+                            UserDatabase userDatabase = UserDatabase.getUserDatabase(getContext());
+                            final UserDao userDao = userDatabase.userDao();
+
+                            String emailText = email.getText().toString().trim();
+                            String passwordText = password.getText().toString().trim();
+                            User user = userDao.getUserByEmail(emailText);
+                            if (user == null) {
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                            public void run(){
+                                        Toast.makeText(getContext(), "Invalid login", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                            else {
+                                if(BCrypt.checkpw(passwordText, user.getPassword())) {
+                                    Intent goalsRedirect = new Intent(getContext(), GoalsActivity.class);
+                                    startActivity(goalsRedirect);
+                                }
+                            }
+                        }
+                    }).start();
+
                 }
             }
         });
@@ -54,9 +88,7 @@ public class LoginFragment extends Fragment {
 
     String checkDataEntered() {
         if (TextUtils.isEmpty(email.getText().toString()) ||
-                TextUtils.isEmpty(password.getText().toString()) ||
-                !(email.getText().toString().equals(correct_email)) ||
-                !(password.getText().toString().equals(correct_pass))) {
+                TextUtils.isEmpty(password.getText().toString())) {
             Toast invalid = Toast.makeText(getActivity(), "Invalid Login!", Toast.LENGTH_SHORT);
             email.setError("Invalid Credentials!");
             password.setError("Invalid Credentials!");
@@ -64,8 +96,6 @@ public class LoginFragment extends Fragment {
             return "false";
         }
         else {
-            Toast loginSuccess = Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_SHORT);
-            loginSuccess.show();
             return "true";
         }
 
