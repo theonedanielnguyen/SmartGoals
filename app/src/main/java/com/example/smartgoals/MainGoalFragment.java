@@ -12,6 +12,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.smartgoals.daos.GoalDao;
+import com.example.smartgoals.daos.UserDao;
+import com.example.smartgoals.databases.GoalDatabase;
+import com.example.smartgoals.databases.UserDatabase;
+import com.example.smartgoals.models.Goal;
+import com.example.smartgoals.models.User;
+
 import java.util.Date;
 
 public class MainGoalFragment extends Fragment {
@@ -38,6 +45,25 @@ public class MainGoalFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
+
+                Goal newGoal = new Goal();
+                newGoal.setTitle(goalName.getText().toString());
+                newGoal.setDescription(goalDescription.getText().toString());
+                newGoal.setEndDate(goalCompletionDate.getText().toString());
+
+                GoalDatabase goalDatabase = GoalDatabase.getGoalDatabase(getContext());
+                final GoalDao goalDao = goalDatabase.goalDao();
+                new Thread(new Runnable () {
+                    @Override
+                    public void run() {
+
+                        // Registers the User
+                        goalDao.insert(newGoal);
+                        System.out.println("New goal created!");
+//                        Toast.makeText(getContext(), "Goal Created!", Toast.LENGTH_SHORT).show();
+                    }
+                }).start();
+
                 FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.fragment_container_view, GoalTasksFragment.class, null, "createToTasks");

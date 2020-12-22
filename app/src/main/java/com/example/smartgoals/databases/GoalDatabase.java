@@ -5,17 +5,25 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.room.Dao;
+
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import com.example.smartgoals.daos.GoalDao;
 import com.example.smartgoals.daos.UserDao;
+import com.example.smartgoals.models.Goal;
 import com.example.smartgoals.models.User;
+
+import java.text.DateFormat;
 
 @Database(entities = {Goal.class}, version=1)
 public abstract class GoalDatabase extends RoomDatabase {
     public static GoalDatabase goalDatabase;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 
     public abstract GoalDao goalDao();
 
@@ -47,7 +55,7 @@ public abstract class GoalDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            goalDao.insert(new Goal());
+            goalDao.insert(new Goal(-1, "Lose 10 Lbs", "Drop those holiday lbs by Jan 10.", "2021/01/10"));
             return null;
         }
 
