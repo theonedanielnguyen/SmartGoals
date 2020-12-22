@@ -80,8 +80,8 @@ public class RegisterFragment extends Fragment {
                         }
                     }).start();
 
-                    Intent goalsRedirect = new Intent(getContext(), GoalsActivity.class);
-                    startActivity(goalsRedirect);
+                    Intent dummyDashboard = new Intent(getContext(), DummyDashboard.class);
+                    startActivity(dummyDashboard);
                 }
             }
         });
