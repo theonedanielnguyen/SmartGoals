@@ -9,6 +9,7 @@ import androidx.room.Update;
 
 import com.example.smartgoals.models.Goal;
 import com.example.smartgoals.models.User;
+import com.example.smartgoals.models.UserWithGoals;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public interface UserDao {
 
     @Transaction
     @Insert
-    int insertUser(User user);
+    long insertUser(User user);
 
     @Insert
     void insertGoals(List<Goal> goals);

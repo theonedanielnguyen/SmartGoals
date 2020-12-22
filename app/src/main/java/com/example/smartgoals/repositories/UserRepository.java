@@ -107,7 +107,7 @@ public class UserRepository {
 
         @Override
         protected Void doInBackground(UserWithGoals... userWithGoals) {
-            int identifier = userDaoAsync.insertUser(userWithGoals[0].user);
+            long identifier = userDaoAsync.insertUser(userWithGoals[0].user);
 
             for (Goal goal : userWithGoals[0].goals) {
                 goal.setGoalId(identifier);

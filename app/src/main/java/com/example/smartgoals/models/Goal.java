@@ -12,7 +12,7 @@ import static androidx.room.ForeignKey.CASCADE;
 @Entity(tableName = "goal_table")
 public class Goal {
     @PrimaryKey(autoGenerate = true)
-    private int goalId;
+    private long goalId;
 
     @ColumnInfo(name = "title")
     private String title;
@@ -29,24 +29,24 @@ public class Goal {
             childColumns = "user_goal_id",
             onDelete = CASCADE
     )
-    private int user_goal_id;
+    private long user_goal_id;
 
     public Goal(){
 
     }
 
-    public Goal(int goalId, String title, String description, String endDate) {
+    public Goal(long goalId, String title, String description, String endDate) {
         this.goalId = goalId;
         this.title = title;
         this.description = description;
         this.endDate = endDate;
     }
 
-    public int getGoalId() {
+    public long getGoalId() {
         return goalId;
     }
 
-    public void setGoalId(int goalId) {
+    public void setGoalId(long goalId) {
         this.goalId = goalId;
     }
 
@@ -74,11 +74,11 @@ public class Goal {
         this.endDate = endDate;
     }
 
-    public int getUser_goal_id() {
+    public long getUser_goal_id() {
         return user_goal_id;
     }
 
-    public void setUser_goal_id(int user_goal_id) {
+    public void setUser_goal_id(long user_goal_id) {
         this.user_goal_id = user_goal_id;
     }
 }

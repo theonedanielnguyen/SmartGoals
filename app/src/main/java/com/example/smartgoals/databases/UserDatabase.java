@@ -11,9 +11,10 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.smartgoals.daos.UserDao;
+import com.example.smartgoals.models.Goal;
 import com.example.smartgoals.models.User;
 
-@Database(entities = {User.class}, version = 1)
+@Database(entities = {User.class, Goal.class}, version = 1)
 public abstract class UserDatabase extends RoomDatabase {
     public static UserDatabase userDatabase;
 
