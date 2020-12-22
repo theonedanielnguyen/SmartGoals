@@ -4,9 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverter;
 
-import java.util.Date;
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "goal_table")
@@ -32,7 +30,7 @@ public class Goal {
     private long user_goal_id;
 
     public Goal(){
-
+    // to let you pull
     }
 
     public Goal(long goalId, String title, String description, String endDate) {
