@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 public class  User {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private long id;
 
     @ColumnInfo(name = "first_name")
     private String firstName;
@@ -31,7 +31,7 @@ public class  User {
 
     }
 
-    public User(int id,
+    public User(long id,
                 String firstName,
                 String lastName,
                 String email,
@@ -59,11 +59,11 @@ public class  User {
     }
 
     // SETTERS & GETTERS
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

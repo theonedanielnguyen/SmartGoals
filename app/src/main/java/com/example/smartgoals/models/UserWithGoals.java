@@ -13,6 +13,7 @@ public class UserWithGoals {
             parentColumn = "id",
             entityColumn = "goal_id"
     )
+
     public List<Goal> goals;
 
     public UserWithGoals(User user, List<Goal> goals){
