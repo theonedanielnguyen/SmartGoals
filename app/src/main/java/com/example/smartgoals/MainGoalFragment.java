@@ -1,25 +1,19 @@
 package com.example.smartgoals;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.smartgoals.daos.GoalDao;
-import com.example.smartgoals.daos.UserDao;
-import com.example.smartgoals.databases.GoalDatabase;
-import com.example.smartgoals.databases.UserDatabase;
-import com.example.smartgoals.models.Goal;
-import com.example.smartgoals.models.User;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import java.util.Date;
+import com.example.smartgoals.daos.GoalDao;
+import com.example.smartgoals.databases.GoalDatabase;
+import com.example.smartgoals.models.Goal;
 
 public class MainGoalFragment extends Fragment {
 
@@ -41,6 +35,7 @@ public class MainGoalFragment extends Fragment {
         goalDescription = view.findViewById(R.id.mainGoalDescription);
         continueToTaskCreation = view.findViewById(R.id.continueToTasks);
 
+
         continueToTaskCreation.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -50,6 +45,7 @@ public class MainGoalFragment extends Fragment {
                 newGoal.setTitle(goalName.getText().toString());
                 newGoal.setDescription(goalDescription.getText().toString());
                 newGoal.setEndDate(goalCompletionDate.getText().toString());
+                newGoal.setProgress((0));
 
                 GoalDatabase goalDatabase = GoalDatabase.getGoalDatabase(getContext());
                 final GoalDao goalDao = goalDatabase.goalDao();
