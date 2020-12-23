@@ -1,5 +1,7 @@
 package com.example.smartgoals;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,11 @@ public class MainGoalFragment extends Fragment {
     EditText goalCompletionDate;
     EditText goalDescription;
     Button continueToTaskCreation;
+    SharedPreferences sharedPreferences;
+
+    private static final String USER_SESSION = "user_session";
+    private static final String USER_ID = "user_id";
+    private static final String USER_NAME = "user_name";
 
     public MainGoalFragment() {
         // Required empty public constructor
@@ -36,6 +43,10 @@ public class MainGoalFragment extends Fragment {
         continueToTaskCreation = view.findViewById(R.id.continueToTasks);
 
 
+        sharedPreferences = getActivity().getSharedPreferences(USER_SESSION, Context.MODE_PRIVATE);
+
+        Long user_id = sharedPreferences.getLong(USER_ID, 0);
+
         continueToTaskCreation.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -45,7 +56,9 @@ public class MainGoalFragment extends Fragment {
                 newGoal.setTitle(goalName.getText().toString());
                 newGoal.setDescription(goalDescription.getText().toString());
                 newGoal.setEndDate(goalCompletionDate.getText().toString());
+                newGoal.setUser_goal_id(user_id);
                 newGoal.setProgress((0));
+
 
                 GoalDatabase goalDatabase = GoalDatabase.getGoalDatabase(getContext());
                 final GoalDao goalDao = goalDatabase.goalDao();
@@ -53,7 +66,7 @@ public class MainGoalFragment extends Fragment {
                     @Override
                     public void run() {
 
-                        // Registers the User
+                        // CREATES NEW GOAL
                         goalDao.insert(newGoal);
                         System.out.println("New goal created!");
 //                        Toast.makeText(getContext(), "Goal Created!", Toast.LENGTH_SHORT).show();
