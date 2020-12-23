@@ -35,9 +35,6 @@ public class DummyDashboard extends AppCompatActivity {
     private ArrayList<Goal> goalArrayList;
     private GoalAdapter adapter;
 
-    TextView firstGoal;
-    TextView secondGoal;
-    TextView thirdGoal;
     Button logout_button;
 
 
@@ -66,7 +63,13 @@ public class DummyDashboard extends AppCompatActivity {
         adapter = new GoalAdapter(goalArrayList, new OnRecyclerClickListener() {
             @Override
             public void onRecyclerViewItemClicked(int position, int id) {
+                Goal myGoal = goalArrayList.get(position);
                 Intent showGoal = new Intent(getApplicationContext(), ShowGoalActivity.class);
+                Bundle myBundle = new Bundle();
+                myBundle.putString("title", myGoal.getTitle());
+                myBundle.putString("description", myGoal.getDescription());
+                myBundle.putInt("progress", myGoal.getProgress());
+                showGoal.putExtras(myBundle);
                 startActivity(showGoal);
             }
         });
@@ -146,19 +149,19 @@ public class DummyDashboard extends AppCompatActivity {
     private void setGoalInfo() {
 
         Goal myGoal;
-        myGoal = new Goal(5,"Java Project", "Finish this app well enough to present to the class at 3PM", "12/23/3030", 75);
+        myGoal = new Goal(5,"Java Project", "Finish this app well enough to present to the class at 3PM", "12/23/3030", 0);
         goalArrayList.add(myGoal);
 
         Goal otherGoal;
-        otherGoal = new Goal(6, "Get A Job!", "Find a new job as a really cool junior dev at a really cool company!", "1/1/2021", 14);
+        otherGoal = new Goal(6, "Get A Job!", "Find a new job as a really cool junior dev at a really cool company!", "1/1/2021", 0);
         goalArrayList.add(otherGoal);
 
         Goal thirdGoal;
-        thirdGoal = new Goal(7, "Christmas Shopping", "Finish up getting presents for all my friends and family!", "12/24/2020", 97);
+        thirdGoal = new Goal(7, "Christmas Shopping", "Finish up getting presents for all my friends and family!", "12/24/2020", 0);
         goalArrayList.add(thirdGoal);
 
         Goal fourthGoal;
-        fourthGoal = new Goal(8, "MERN Belt", "Study hard enough to pass MERN!", "1/29/2021", 3);
+        fourthGoal = new Goal(8, "MERN Belt", "Study hard enough to pass MERN!", "1/29/2021", 0);
         goalArrayList.add(fourthGoal);
 
 
