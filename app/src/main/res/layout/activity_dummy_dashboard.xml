@@ -36,12 +36,11 @@
         android:id="@+id/addGoal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/thirdGoalProgressBar"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView2"
         app:srcCompat="@android:drawable/ic_input_add" />
 
     <TextView
@@ -49,77 +48,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="My Goals:"
-        tools:layout_editor_absoluteX="21dp"
-        tools:layout_editor_absoluteY="117dp" />
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:text="Completed Goals:"
-        app:layout_constraintTop_toBottomOf="@+id/addGoal"
-        tools:layout_editor_absoluteX="20dp" />
-
-    <TextView
-        android:id="@+id/firstGoal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:clickable="true"
-        android:text="Goal 1"
-        android:textSize="22sp"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:layout_editor_absoluteX="20dp" />
-
-    <TextView
-        android:id="@+id/secondGoal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:clickable="true"
-        android:text="Goal 2"
-        android:textSize="22sp"
-        app:layout_constraintTop_toBottomOf="@+id/firstGoalProgressBar"
-        tools:layout_editor_absoluteX="20dp" />
-
-    <TextView
-        android:id="@+id/thirdGoal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:clickable="true"
-        android:text="Goal 3"
-        android:textSize="22sp"
-        app:layout_constraintTop_toBottomOf="@+id/secondGoalProgressBar"
-        tools:layout_editor_absoluteX="20dp" />
-
-    <ProgressBar
-        android:id="@+id/firstGoalProgressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        app:layout_constraintTop_toBottomOf="@+id/firstGoal"
-        tools:layout_editor_absoluteX="21dp" />
-
-    <ProgressBar
-        android:id="@+id/secondGoalProgressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        app:layout_constraintTop_toBottomOf="@+id/secondGoal"
-        tools:layout_editor_absoluteX="20dp" />
-
-    <ProgressBar
-        android:id="@+id/thirdGoalProgressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        app:layout_constraintTop_toBottomOf="@+id/thirdGoal"
-        tools:layout_editor_absoluteX="20dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addGoal" />
 
     <TextView
         android:id="@+id/completedGoal1"
@@ -164,6 +108,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/completedGoal2" />
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView2"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:layout_editor_absoluteX="0dp"
+        android:paddingTop="10sp"
+        android:paddingHorizontal="20sp"/>
+
     <Button
         android:id="@+id/logoutButton"
         android:layout_width="129dp"
@@ -175,6 +130,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.132" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
