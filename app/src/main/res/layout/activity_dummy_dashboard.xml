@@ -68,7 +68,7 @@
         android:layout_marginTop="28dp"
         android:clickable="true"
         android:text="Goal 1"
-        android:textSize="24sp"
+        android:textSize="22sp"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         tools:layout_editor_absoluteX="20dp" />
 
@@ -79,7 +79,7 @@
         android:layout_marginTop="44dp"
         android:clickable="true"
         android:text="Goal 2"
-        android:textSize="24sp"
+        android:textSize="22sp"
         app:layout_constraintTop_toBottomOf="@+id/firstGoalProgressBar"
         tools:layout_editor_absoluteX="20dp" />
 
@@ -90,7 +90,7 @@
         android:layout_marginTop="28dp"
         android:clickable="true"
         android:text="Goal 3"
-        android:textSize="24sp"
+        android:textSize="22sp"
         app:layout_constraintTop_toBottomOf="@+id/secondGoalProgressBar"
         tools:layout_editor_absoluteX="20dp" />
 
