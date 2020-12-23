@@ -16,7 +16,7 @@ public class ShowGoalActivity extends AppCompatActivity {
 
     }
 
-        @Override
+//        @Override
         protected void onCreate(Bundle savedInstanceState, ViewGroup container, LayoutInflater
         inflater){
         View view = inflater.inflate(R.layout.activity_show_goal, container, false);
