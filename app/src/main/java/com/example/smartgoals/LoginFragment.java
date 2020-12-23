@@ -50,7 +50,8 @@ public class LoginFragment extends Fragment {
 
         // when activity is first opened - the checks if the shared preferences data is available or not:
         String user_name = sharedPreferences.getString(USER_NAME, null);
-        if (user_name != null) {
+        Long user_id = sharedPreferences.getLong(USER_ID, 0);
+        if (user_name != null || user_id != 0) {
 
             // if data is available --> it will redirect you back to the dashboard.
             Intent redirectToDash = new Intent(getContext(), DummyDashboard.class);
@@ -104,7 +105,6 @@ public class LoginFragment extends Fragment {
                 }
             }
         });
-
         return view;
     }
 

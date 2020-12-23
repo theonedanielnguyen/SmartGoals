@@ -29,10 +29,16 @@ public class DummyDashboard extends AppCompatActivity {
 
     TextView tName;
     FloatingActionButton continueToNewGoal;
-
+  
     private RecyclerView recyclerView;
     private List<Goal> goalArrayList = new ArrayList<>();
     private GoalAdapter adapter;
+
+    TextView firstGoal;
+    TextView secondGoal;
+    TextView thirdGoal;
+    Button logout_button;
+
 
     SharedPreferences sharedPreferences;
 
@@ -46,9 +52,8 @@ public class DummyDashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dummy_dashboard);
 
         tName = findViewById(R.id.firstName);
-//        String firstName = getIntent().getStringExtra("firstName");
-//        tName.setText(firstName);
         continueToNewGoal = (FloatingActionButton) findViewById(R.id.addGoal);
+
 
         //RecyclerView setup
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView2);
@@ -61,14 +66,19 @@ public class DummyDashboard extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         //End RecyclerView Setup
 
+        firstGoal = findViewById(R.id.firstGoal);
+        secondGoal = findViewById(R.id.secondGoal);
+        thirdGoal = findViewById(R.id.thirdGoal);
+        logout_button = findViewById(R.id.logoutButton);
+
         sharedPreferences = getSharedPreferences(USER_SESSION, MODE_PRIVATE);
 
         String name = sharedPreferences.getString(USER_NAME, null);
         Long user_id = sharedPreferences.getLong(USER_ID, 0);
 
-        if (name != null || user_id != null) {
+        if (name != null || user_id != 0) {
             // set data on test view
-            tName.setText("First Name - " +name);
+            tName.setText(name);
         }
 
         //RecyclerView data pull
@@ -97,6 +107,20 @@ public class DummyDashboard extends AppCompatActivity {
                 startActivity(goalsRedirect);
             }
         });
+
+        // call button to logout session
+         logout_button.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 SharedPreferences.Editor editor = sharedPreferences.edit();
+                 editor.clear();
+                 editor.commit();
+                 Toast.makeText(DummyDashboard.this, "Log out successful!", Toast.LENGTH_SHORT).show();
+                 finish();
+             }
+         });
+
+
 
 //        firstGoal.setOnClickListener(new View.OnClickListener() {
 //
