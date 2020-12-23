@@ -1,12 +1,5 @@
 package com.example.smartgoals;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,6 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartgoals.daos.GoalAdapter;
 import com.example.smartgoals.daos.GoalDao;
@@ -129,6 +128,8 @@ public class DummyDashboard extends AppCompatActivity {
                  editor.commit();
                  Toast.makeText(DummyDashboard.this, "Log out successful!", Toast.LENGTH_SHORT).show();
                  finish();
+                 Intent goalsRedirect = new Intent(getApplicationContext(), LogAndRegActivity.class);
+                 startActivity(goalsRedirect);
              }
          });
 
