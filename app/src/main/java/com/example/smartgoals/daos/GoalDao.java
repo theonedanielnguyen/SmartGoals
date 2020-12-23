@@ -9,7 +9,10 @@ import androidx.room.Update;
 import com.example.smartgoals.models.Goal;
 import com.example.smartgoals.models.User;
 
-    @Dao
+import java.util.ArrayList;
+import java.util.List;
+
+@Dao
     public interface GoalDao {
         @Insert
         void insert(Goal goal);
@@ -26,5 +29,8 @@ import com.example.smartgoals.models.User;
         // NEED THIS FOR SHARED PREFERENCES
         @Query("SELECT * FROM goal_table WHERE goalId LIKE :id")
         Goal getGoalByGoalId(int id);
-    }
 
+        //For recycleview
+        @Query("SELECT * FROM goal_table WHERE user_goal_id LIKE :id")
+        List<Goal> getGoalsByUserId(Long id);
+    }
