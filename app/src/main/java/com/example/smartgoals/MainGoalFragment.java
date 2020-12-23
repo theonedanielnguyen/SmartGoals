@@ -1,5 +1,6 @@
 package com.example.smartgoals;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,11 +61,8 @@ public class MainGoalFragment extends Fragment {
                     }
                 }).start();
 
-                FragmentManager fragmentManager = getParentFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fragment_container_view, GoalTasksFragment.class, null, "createToTasks");
-                transaction.addToBackStack("createToTasks");
-                transaction.commit();
+                Intent redirectToDash = new Intent(getContext(), DummyDashboard.class);
+                startActivity(redirectToDash);
             }
         });
 
