@@ -21,6 +21,9 @@ public class Goal {
     @ColumnInfo(name = "endDate")
     private String endDate;
 
+    @ColumnInfo(name = "progress")
+    private int progress;
+
     @ForeignKey(
             entity = User.class,
             parentColumns = "id",
@@ -30,14 +33,15 @@ public class Goal {
     private long user_goal_id;
 
     public Goal(){
-    // to let you pull
+
     }
 
-    public Goal(long goalId, String title, String description, String endDate) {
+    public Goal(long goalId, String title, String description, String endDate, int progress) {
         this.goalId = goalId;
         this.title = title;
         this.description = description;
         this.endDate = endDate;
+        this.progress = progress;
     }
 
     public long getGoalId() {
@@ -79,4 +83,8 @@ public class Goal {
     public void setUser_goal_id(long user_goal_id) {
         this.user_goal_id = user_goal_id;
     }
+
+    public int getProgress() { return progress; }
+
+    public void setProgress(int progress) { this.progress = progress; }
 }
