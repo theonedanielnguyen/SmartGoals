@@ -3,8 +3,6 @@ package com.example.smartgoals.daos;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
-import android.database.Cursor;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,55 +17,73 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GoalAdapter extends RecyclerView.Adapter<GoalAdapter.GoalViewHolder> {
-    private List<Goal> arrayList = new ArrayList<>();
+    private ArrayList<Goal> goalsList = new ArrayList<>();
+    private OnRecyclerClickListener listener;
 
-    public GoalAdapter(List<Goal> arrayList) {
-        this.arrayList = arrayList;
-        Log.v("Initialized", "Adapter initialized");
-        if (!arrayList.isEmpty()) {
+    public GoalAdapter(ArrayList<Goal> goalsList, OnRecyclerClickListener listener) {
+        this.goalsList = goalsList;
+        this.listener = listener;
+//        Log.v("Initialized", "Adapter initialized");
+        if (!goalsList.isEmpty()) {
             System.out.println("Print title:");
-            System.out.println(arrayList.get(0).getTitle());
+            System.out.println(goalsList.get(0).getTitle());
         }
 
     }
 
     public class GoalViewHolder extends RecyclerView.ViewHolder {
-        public TextView nameText;
-        public TextView measurement;
-        public ProgressBar progress;
+        private TextView nameText;
+        private TextView measurement;
+        private ProgressBar progress;
 
-        public GoalViewHolder(@NonNull View itemView) {
+        public GoalViewHolder(final View itemView) {
             super(itemView);
 
             nameText = itemView.findViewById(R.id.goalName);
             measurement = itemView.findViewById(R.id.goalProgress);
             progress = itemView.findViewById(R.id.progressBar);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onRecyclerViewItemClicked(getAdapterPosition(), view.getId()
+                    );
+                }
+            });
         }
     }
 
     @Override
-    public GoalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.v("CreateViewHolder", "in onCreateViewHolder");
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.goal_item, parent, false);
-        return new GoalViewHolder(view);
+    public GoalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//        Log.v("CreateViewHolder", "in onCreateViewHolder");
+//        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+//        View view = inflater.inflate(R.layout.goal_items, parent, false);
+
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.goal_items, parent, false);
+        return new GoalViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(GoalViewHolder holder, int position) {
         Log.v("BindViewHolder", "in onBindViewHolder");
-        Goal goal = arrayList.get(position);
+
+        Goal goal = goalsList.get(position);
         holder.nameText.setText(goal.getTitle());
         //Edit here for actual measurement of goal//
         holder.measurement.setText(goal.getDescription());
         //Edit here for actual measure of progress
         holder.progress.setProgress((int) goal.getUser_goal_id());
+        holder.nameText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onRecyclerViewItemClicked(position, view.getId());
+            }
+        });
 
     }
 
     @Override
     public int getItemCount() {
-        return arrayList.size();
+        return goalsList.size();
     }
 }

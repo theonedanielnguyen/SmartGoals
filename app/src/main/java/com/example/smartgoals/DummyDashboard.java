@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.smartgoals.daos.GoalAdapter;
 import com.example.smartgoals.daos.GoalDao;
+import com.example.smartgoals.daos.OnRecyclerClickListener;
 import com.example.smartgoals.databases.GoalDatabase;
 import com.example.smartgoals.models.Goal;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,7 +32,7 @@ public class DummyDashboard extends AppCompatActivity {
     FloatingActionButton continueToNewGoal;
   
     private RecyclerView recyclerView;
-    private List<Goal> goalArrayList = new ArrayList<>();
+    private ArrayList<Goal> goalArrayList;
     private GoalAdapter adapter;
 
     TextView firstGoal;
@@ -56,9 +57,19 @@ public class DummyDashboard extends AppCompatActivity {
 
 
         //RecyclerView setup
+        goalArrayList = new ArrayList<>();
+        setGoalInfo();
+//        setAdapter();
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView2);
 
-        adapter = new GoalAdapter(goalArrayList);
+        adapter = new GoalAdapter(goalArrayList, new OnRecyclerClickListener() {
+            @Override
+            public void onRecyclerViewItemClicked(int position, int id) {
+                Intent showGoal = new Intent(getApplicationContext(), ShowGoalActivity.class);
+                startActivity(showGoal);
+            }
+        });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -66,9 +77,6 @@ public class DummyDashboard extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         //End RecyclerView Setup
 
-        firstGoal = findViewById(R.id.firstGoal);
-        secondGoal = findViewById(R.id.secondGoal);
-        thirdGoal = findViewById(R.id.thirdGoal);
         logout_button = findViewById(R.id.logoutButton);
 
         sharedPreferences = getSharedPreferences(USER_SESSION, MODE_PRIVATE);
@@ -88,11 +96,12 @@ public class DummyDashboard extends AppCompatActivity {
             public void run() {
                 GoalDatabase goalDatabase = GoalDatabase.getGoalDatabase(getApplicationContext());
                 final GoalDao goalDao = goalDatabase.goalDao();
-
+                List<Goal> goalArrayList = new ArrayList<>();
                 goalArrayList = goalDao.getGoalsByUserId(user_id);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run(){
+                        recyclerView.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
                         Log.v("datasetChanged", "notified data change");
                     }
@@ -122,11 +131,36 @@ public class DummyDashboard extends AppCompatActivity {
 
 
 
-//        firstGoal.setOnClickListener(new View.OnClickListener() {
-//
-//        });
-//
-//        secondGoal.setOnClickListener();
+
+
+    }
+
+//    private void setAdapter() {
+//        GoalAdapter goalAdapter = new GoalAdapter(goalArrayList);
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+//        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        recyclerView.setAdapter(goalAdapter);
+//    }
+
+    private void setGoalInfo() {
+
+        Goal myGoal;
+        myGoal = new Goal(5,"Java Project", "Finish this app well enough to present to the class at 3PM", "12/23/3030", 75);
+        goalArrayList.add(myGoal);
+
+        Goal otherGoal;
+        otherGoal = new Goal(6, "Get A Job!", "Find a new job as a really cool junior dev at a really cool company!", "1/1/2021", 14);
+        goalArrayList.add(otherGoal);
+
+        Goal thirdGoal;
+        thirdGoal = new Goal(7, "Christmas Shopping", "Finish up getting presents for all my friends and family!", "12/24/2020", 97);
+        goalArrayList.add(thirdGoal);
+
+        Goal fourthGoal;
+        fourthGoal = new Goal(8, "MERN Belt", "Study hard enough to pass MERN!", "1/29/2021", 3);
+        goalArrayList.add(fourthGoal);
+
 
     }
 }
